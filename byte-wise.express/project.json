@@ -1,0 +1,77 @@
+{
+  "name": "byte-wise.express",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "byte-wise.express/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "platform": "node",
+        "outputPath": "dist/byte-wise.express",
+        "format": ["cjs"],
+        "bundle": false,
+        "main": "byte-wise.express/src/main.ts",
+        "tsConfig": "byte-wise.express/tsconfig.app.json",
+        "assets": ["byte-wise.express/src/assets"],
+        "generatePackageJson": true,
+        "esbuildOptions": {
+          "sourcemap": true,
+          "outExtension": {
+            ".js": ".js"
+          }
+        }
+      },
+      "configurations": {
+        "development": {},
+        "production": {
+          "esbuildOptions": {
+            "sourcemap": false,
+            "outExtension": {
+              ".js": ".js"
+            }
+          }
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "byte-wise.express:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "byte-wise.express:build:development"
+        },
+        "production": {
+          "buildTarget": "byte-wise.express:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["byte-wise.express/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "byte-wise.express/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": []
+}
