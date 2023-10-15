@@ -11,11 +11,12 @@ export const Auth0ProviderWithNavigate = ({
 }: PropsWithChildren<Auth0ProviderWithNavigateProps>): JSX.Element | null => {
   const navigate = useNavigate();
 
-  /** Auth0 Authentication */
-  const domain = process.env.REACT_APP_AUTH0_DOMAIN;
-  const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
-  const redirect_uri = process.env.REACT_APP_AUTH0_CALLBACK_URL;
-  const audience = process.env.REACT_APP_AUTH0_AUDIENCE;
+  /** Auth0 Authentication Start */
+  const domain = process.env.NX_REACT_APP_AUTH0_DOMAIN;
+  const clientId = process.env.NX_REACT_APP_AUTH0_CLIENT_ID;
+  const redirect_uri = process.env.NX_REACT_APP_AUTH0_CALLBACK_URL;
+  const audience = process.env.NX_REACT_APP_AUTH0_AUDIENCE;
+  /** Auth0 Authentication End */
 
   const origin = window.location.pathname;
 
