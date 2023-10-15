@@ -1,7 +1,5 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import styles from './app.module.css';
-
 import { Route, Routes, Link } from 'react-router-dom';
+
 // auth
 import {
   Auth0ProviderWithNavigate,
@@ -13,11 +11,16 @@ import {
 
 // notifications
 import { NotificationToastProvider } from '../components';
+import Button  from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
 
 export const Hello: React.FC = () => {
   return (
     <div>
-      <h1>Hello World Page</h1>
+      <Container>
+        
+      <Button variant='primary'>Hello World</Button>
+      </Container>
     </div>
   );
 };
