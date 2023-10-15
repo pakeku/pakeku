@@ -1,0 +1,96 @@
+{
+  "name": "byte-wise.react",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "byte-wise.react/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/byte-wise.react",
+        "index": "byte-wise.react/src/index.html",
+        "baseHref": "/",
+        "main": "byte-wise.react/src/main.tsx",
+        "tsConfig": "byte-wise.react/tsconfig.app.json",
+        "assets": [
+          "byte-wise.react/src/favicon.ico",
+          "byte-wise.react/src/assets"
+        ],
+        "styles": ["byte-wise.react/src/styles.css"],
+        "scripts": [],
+        "isolatedConfig": true,
+        "webpackConfig": "byte-wise.react/webpack.config.js"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "byte-wise.react/src/environments/environment.ts",
+              "with": "byte-wise.react/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/webpack:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "byte-wise.react:build",
+        "hmr": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "byte-wise.react:build:development"
+        },
+        "production": {
+          "buildTarget": "byte-wise.react:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["byte-wise.react/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "byte-wise.react:build"
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "byte-wise.react/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": []
+}
