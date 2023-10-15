@@ -1,1 +1,55 @@
-/* You can add global styles to this file, and also import other style files */
+/* Import fonts */
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap");
+
+/* Define custom colors and fonts as CSS variables */
+:root {
+  --custom-font-primary: "Inter", sans-serif;
+  --custom-font-secondary: "Space Grotesk", sans-serif;
+  --custom-font-mono: "Fira Code", monospace;
+  
+  --custom-orange: #ff4f40;
+  --custom-indigo: #635dff;
+  --custom-white: #fff;
+  --custom-light-aluminium: #eaecee;
+  --custom-aluminium: #bdc4cf;
+  --custom-dark-aluminium: #2a2e35;
+  --custom-black: #000000;
+  --custom-yellow: #ebca40;
+  --custom-mandarine: #ff7f38;
+  --custom-pink: #ff44dd;
+  --custom-blue: #3885ff;
+  --custom-aqua: #3ec6eb;
+  --custom-emerald: #1bc99f;
+}
+
+/* Apply custom fonts using custom CSS variables */
+body {
+  font-family: var(--custom-font-primary);
+}
+
+h1, h2, h3 {
+  font-family: var(--custom-font-secondary);
+}
+
+pre, code {
+  font-family: var(--custom-font-mono);
+}
+
+/* Apply custom colors using custom CSS variables */
+body {
+  background-color: var(--custom-white);
+  color: var(--custom-black);
+}
+
+/* Define Bootstrap-specific CSS overrides */
+/* For example, if you want to change Bootstrap's primary button color */
+.btn-primary {
+  background-color: var(--custom-orange);
+  border-color: var(--custom-orange);
+  color: var(--custom-white);
+}
+
+/* Override Bootstrap's link color */
+a {
+  color: var(--custom-indigo);
+}
