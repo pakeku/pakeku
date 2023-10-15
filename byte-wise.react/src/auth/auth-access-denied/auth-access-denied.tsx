@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AccessDenied: React.FC = () => {
+export const AuthAccessDenied: React.FC = () => {
   return (
     <div>
       <h1>Access Denied</h1>
@@ -10,4 +10,4 @@ const AccessDenied: React.FC = () => {
   );
 };
 
-export default AccessDenied;
+export default AuthAccessDenied;

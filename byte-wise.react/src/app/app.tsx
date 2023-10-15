@@ -7,8 +7,9 @@ import {
   Auth0ProviderWithNavigate,
   AuthButton,
   AuthenticationGuard,
+  AuthAccessDenied,
+  AuthProfilePage,
 } from '../auth';
-import AccessDenied from '../auth/auth-access-denied/auth-access-denied';
 
 // notifications
 import { NotificationToastProvider } from '../components';
@@ -52,7 +53,8 @@ export function App() {
                 path="/page-2"
                 element={<AuthenticationGuard component={AuthenticatedPage} />}
               />
-              <Route path="/access-denied" element={<AccessDenied />} />
+              <Route path="/access-denied" element={<AuthAccessDenied />} />
+              <Route path="/profile" element={<AuthProfilePage />} />
               <Route path="*" element={<div>Not Found</div>} />
             </Routes>
           </div>
