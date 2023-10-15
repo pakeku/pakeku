@@ -11,7 +11,7 @@ export const AuthProfilePage: React.FC = () => {
   return (
     user &&
     isAuthenticated && (
-      <div className="content-layout">
+      <div className="container mt-4">
         <h1 id="page-title" className="content__title">
           Profile Page
         </h1>
