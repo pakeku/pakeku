@@ -1,5 +1,6 @@
 import { AuthAccessDenied } from 'byte-wise.react/src/auth';
-import { ProfilePage } from 'byte-wise.react/src/pages/profile-page/profile-page';
+import { ProfilePage, UnauthorizedPage } from 'byte-wise.react/src/pages';
+
 export const routes = [
   {
     path: '/auth-access-denied',
