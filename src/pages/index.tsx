@@ -1,10 +1,10 @@
-import '~/lib/bootstrap.init'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 import type { GetStaticProps, InferGetStaticPropsType } from 'next'
+import Script from 'next/script'
 import { useLiveQuery } from 'next-sanity/preview'
 
 import Card from '~/components/Card'
-import Container from '~/components/Container'
 import Welcome from '~/components/Welcome'
 import { readToken } from '~/lib/sanity.api'
 import { getClient } from '~/lib/sanity.client'
@@ -33,7 +33,7 @@ export default function IndexPage(
 ) {
   const [posts] = useLiveQuery<Post[]>(props.posts, postsQuery)
   return (
-    <Container>
+    <div className="container">
       <section>
         {posts.length ? (
           posts.map((post) => <Card key={post._id} post={post} />)
@@ -41,6 +41,12 @@ export default function IndexPage(
           <Welcome />
         )}
       </section>
-    </Container>
+      <Script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossOrigin="anonymous"
+        strategy="beforeInteractive"
+      />
+    </div>
   )
 }
