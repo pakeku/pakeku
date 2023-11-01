@@ -1,3 +1,5 @@
+import '~/lib/bootstrap.init'
+
 import type { GetStaticProps, InferGetStaticPropsType } from 'next'
 import { useLiveQuery } from 'next-sanity/preview'
 
