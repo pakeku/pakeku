@@ -36,7 +36,7 @@ export async function getPostsByDate(
     endDate,
   })
 }
-
+// Interface
 export interface Post {
   _type: 'post'
   _id: string
@@ -46,4 +46,6 @@ export interface Post {
   excerpt?: string
   mainImage?: ImageAsset
   body: PortableTextBlock[]
+  category?: string // Add category field
+  tags?: string[] // Add tags field
 }

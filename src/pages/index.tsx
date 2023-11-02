@@ -1,5 +1,6 @@
 import { PortableText } from '@portabletext/react'
 import type { GetStaticProps, InferGetStaticPropsType } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useLiveQuery } from 'next-sanity/preview'
 
@@ -35,23 +36,11 @@ export default function IndexPage(
   const recentposts = posts.slice(0, 10)
 
   return (
-    <Container>
+    <Container posts={posts}>
       <main>
         <div className="row g-5">
           <div className="col-md-8">
-            <article className="blog-post mb-5">
-              <div className="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-light">
-                <div className="px-0">
-                  <h1 className="display-4 fst-italic fw-bold">
-                    {posts[0].title}
-                  </h1>
-                  <p className="lead mb-0">{formatDate(posts[0]._createdAt)}</p>
-                  <NewTag date={posts[0]._createdAt} />
-                  <p className="lead my-3 text-black">{posts[0].excerpt}</p>
-                </div>
-              </div>
-              <PortableText value={posts[0].body} />
-            </article>
+            <BlogPost post={posts[0]} />
           </div>
           <div className="col-md-4">
             <div className="position-sticky" style={{ top: '2rem' }}>
@@ -120,6 +109,32 @@ export default function IndexPage(
     </Container>
   )
 }
+export const CategoryTag = ({ category }: { category: string }) => {
+  if (category === undefined) return null
+  return (
+    <span className="badge border rounded-pill bg-light text-black m-1">
+      {category}
+    </span>
+  )
+}
+
+export const Tag = ({ tags }: { tags: string[] }) => {
+  if (!tags || tags.length === 0) return null
+
+  return (
+    <div className="mt-5">
+      <p className="text-muted">Tags</p>
+      {tags.map((tag, index) => (
+        <span
+          key={index}
+          className="badge border rounded-pill bg-light text-black m-1"
+        >
+          {tag}
+        </span>
+      ))}
+    </div>
+  )
+}
 
 export const NewTag = ({ date }: { date: string }) => {
   const postDate = new Date(date).getTime()
@@ -144,7 +159,36 @@ export const NewTag = ({ date }: { date: string }) => {
 
   return null // Don't render anything if it's not new
 }
+export const BlogPost = ({ post }: { post: Post }) => {
+  return (
+    <article className="blog-post mb-5">
+      <div className="p-4 p-md-0 mb-4 rounded text-body-emphasis bg-body-light">
+        <div>
+          <h1 className="display-4 fst-italic fw-bold">{post.title}</h1>
+          <p className="lead mb-0">{formatDate(post._createdAt)}</p>
+          <NewTag date={post._createdAt} />
+          <CategoryTag category={post.category} />
+          <p className="lead my-3 text-black">{post.excerpt}</p>
+          {post.mainImage ? (
+            <Image
+              src={urlForImage(post.mainImage).url()}
+              height={231}
+              width={367}
+              alt=""
+              className="img-fluid"
+            />
+          ) : null}
+        </div>
+      </div>
 
+      <div className="container">
+        <PortableText value={post.body} />
+      </div>
+
+      <Tag tags={post.tags} />
+    </article>
+  )
+}
 export const getArchivalDates = (posts: Post[]) => {
   const uniqueDates = new Set<string>()
 
