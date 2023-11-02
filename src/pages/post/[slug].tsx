@@ -1,6 +1,7 @@
 import { PortableText } from '@portabletext/react'
 import type { GetStaticProps, InferGetStaticPropsType } from 'next'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useLiveQuery } from 'next-sanity/preview'
 
 import Container from '~/components/Container'
@@ -53,6 +54,16 @@ export default function ProjectSlugRoute(
 
   return (
     <Container>
+      <nav aria-label="breadcrumb">
+        <ol className="breadcrumb">
+          <li className="breadcrumb-item">
+            <Link href="/">Blogs</Link>
+          </li>
+          <li className="breadcrumb-item active" aria-current="page">
+            {formatDate(post._createdAt)}
+          </li>
+        </ol>
+      </nav>
       <section className="post">
         {post.mainImage ? (
           <Image

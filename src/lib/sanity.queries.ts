@@ -20,9 +20,22 @@ export async function getPost(
   })
 }
 
-export const postSlugsQuery = groq`
-*[_type == "post" && defined(slug.current)][].slug.current
+export const postSlugsQuery = groq`*[_type == "post" && defined(slug.current)][].slug.current`
+
+export const postsByDateQuery = groq`
+*[_type == "post" && defined(slug.current) && _createdAt >= $startDate && _createdAt < $endDate] | order(_createdAt desc)
 `
+
+export async function getPostsByDate(
+  client: SanityClient,
+  startDate: string,
+  endDate: string,
+): Promise<Post[]> {
+  return await client.fetch(postsByDateQuery, {
+    startDate,
+    endDate,
+  })
+}
 
 export interface Post {
   _type: 'post'
