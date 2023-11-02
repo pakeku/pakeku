@@ -4,8 +4,11 @@ export default function Container({ children }: { children: React.ReactNode }) {
   return (
     <div className="container">
       <header className="header">
-        <Link className="header__title" href="/">
-          Next.js + Sanity
+        <Link className="nav-link mt-3" href="/">
+          <h3 className="pb-4 mb-4 fst-italic border-bottom">
+            IT Stuff&nbsp;
+            <code>Blog</code>
+          </h3>
         </Link>
       </header>
       <main>{children}</main>
@@ -27,7 +30,7 @@ export default function Container({ children }: { children: React.ReactNode }) {
               strokeWidth="1.2"
             ></path>
           </svg>{' '}
-          at Sanity
+          somewhere in Boston, MA
         </p>
       </footer>
     </div>
