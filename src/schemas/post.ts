@@ -39,6 +39,19 @@ export default defineType({
       title: 'Body',
       type: 'blockContent',
     }),
+    // Add category field
+    defineField({
+      name: 'category',
+      title: 'Category',
+      type: 'string', // You can use a string or reference type depending on your use case
+    }),
+    // Add tags field
+    defineField({
+      name: 'tags',
+      title: 'Tags',
+      type: 'array',
+      of: [{ type: 'string' }], // You can use an array of strings for tags
+    }),
   ],
   preview: {
     select: {

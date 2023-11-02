@@ -1,0 +1,4 @@
+.custom-link {
+  text-decoration: none; /* Remove underline */
+  color: inherit; /* Inherit the text color from the parent element */
+}

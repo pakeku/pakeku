@@ -1,6 +1,7 @@
 import { PortableText } from '@portabletext/react'
 import type { GetStaticProps, InferGetStaticPropsType } from 'next'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useLiveQuery } from 'next-sanity/preview'
 
 import Container from '~/components/Container'
@@ -53,7 +54,17 @@ export default function ProjectSlugRoute(
 
   return (
     <Container>
-      <section className="container">
+      <nav aria-label="breadcrumb">
+        <ol className="breadcrumb">
+          <li className="breadcrumb-item">
+            <Link href="/">Blogs</Link>
+          </li>
+          <li className="breadcrumb-item active" aria-current="page">
+            {formatDate(post._createdAt)}
+          </li>
+        </ol>
+      </nav>
+      <section className="post">
         {post.mainImage ? (
           <Image
             className="post__cover"
@@ -67,9 +78,8 @@ export default function ProjectSlugRoute(
         )}
         <div className="post__container">
           <h1 className="post__title">{post.title}</h1>
-          <p className="text-muted">{formatDate(post._createdAt)}</p>
-
           <p className="post__excerpt">{post.excerpt}</p>
+          <p className="post__date">{formatDate(post._createdAt)}</p>
           <div className="post__content">
             <PortableText value={post.body} />
           </div>
