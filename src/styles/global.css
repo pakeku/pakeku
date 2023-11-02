@@ -1,4 +1,12 @@
+/* styles.css */
+:root {
+  --primary-color: #007bff;
+  /* Define the primary color to match Bootstrap's primary color */
+}
+
 .custom-link {
-  text-decoration: none; /* Remove underline */
-  color: inherit; /* Inherit the text color from the parent element */
+  text-decoration: none;
+  /* Remove underline */
+  color: inherit;
+  /* Inherit the text color from the parent element */
 }

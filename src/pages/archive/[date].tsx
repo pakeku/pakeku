@@ -45,8 +45,17 @@ export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
 const ArchivePage = ({ posts, date }: Props) => {
   return (
     <Container>
-      <div>
-        <p className="lead">Blogs from&nbsp;{formatToArchiveDate(date)}</p>
+      <div className="mb-4">
+        <nav aria-label="breadcrumb">
+          <ol className="breadcrumb">
+            <li className="breadcrumb-item">
+              <Link href="/">Blog</Link>
+            </li>
+            <li className="breadcrumb-item active" aria-current="page">
+              {formatToArchiveDate(date)}
+            </li>
+          </ol>
+        </nav>
         <ul className="list-group list-group-flush">
           {posts.map((post) => (
             <Link
@@ -54,10 +63,11 @@ const ArchivePage = ({ posts, date }: Props) => {
               key={post._id}
               href={`/post/${post.slug.current}`}
             >
-              <li className="list-group-item py-2 my-2">
+              <li className="list-group-item py-2 my-2 custom-hover">
                 <h2>{post.title}</h2>
                 <p className="text-muted">{formatDate(post._createdAt)}</p>
                 <p>{post.excerpt}</p>
+                <p className="text-end">🔗</p>
               </li>
             </Link>
           ))}
