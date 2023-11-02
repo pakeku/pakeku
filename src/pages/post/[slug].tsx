@@ -17,7 +17,7 @@ import {
 import type { SharedPageProps } from '~/pages/_app'
 import { formatDate, formatToArchiveDate } from '~/utils'
 
-import { getArchivalDates } from '..'
+import { BlogPost, getArchivalDates } from '..'
 
 interface Query {
   [key: string]: string
@@ -54,46 +54,31 @@ export default function ProjectSlugRoute(
     slug: props.post.slug.current,
   })
 
+  const FilePath = (
+    <nav aria-label="breadcrumb">
+      <ol className="breadcrumb">
+        <li className="breadcrumb-item">
+          <Link href="/">Blog</Link>
+        </li>
+        <li className="breadcrumb-item">
+          <Link href={`/archive/${getArchivalDates([post])[0]}`}>
+            {formatToArchiveDate(post._createdAt)}
+          </Link>
+        </li>
+        <li className="breadcrumb-item active" aria-current="page">
+          {post.title}
+        </li>
+      </ol>
+    </nav>
+  )
+
   return (
     <Container>
-      <nav aria-label="breadcrumb">
-        <ol className="breadcrumb">
-          <li className="breadcrumb-item">
-            <Link href="/">Blog</Link>
-          </li>
-          <li className="breadcrumb-item">
-            <Link href={`/archive/${getArchivalDates([post])[0]}`}>
-              {formatToArchiveDate(post._createdAt)}
-            </Link>
-          </li>
-          <li className="breadcrumb-item active" aria-current="page">
-            {post.title}
-          </li>
-        </ol>
-      </nav>
+      {FilePath}
       <section>
-        <div className="container border rounded p-4">
-          <h1 className="display-4 fst-italic">{post.title}</h1>
-
-          <p className="lead">{post.excerpt}</p>
-          {post.mainImage ? (
-            <div>
-              <Image
-                src={urlForImage(post.mainImage).url()}
-                height={231}
-                width={367}
-                alt=""
-                className="img-fluid"
-              />
-            </div>
-          ) : null}
-
-          <p className="text-body-secondary">{formatDate(post._createdAt)}</p>
-          <div className="">
-            <PortableText value={post.body} />
-          </div>
-        </div>
+        <BlogPost post={post} />
       </section>
+      {FilePath}
     </Container>
   )
 }

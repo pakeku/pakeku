@@ -50,7 +50,7 @@ export default defineType({
       name: 'tags',
       title: 'Tags',
       type: 'array',
-      of: [{ type: 'string' }], // You can use an array of strings for tags
+      of: [{ type: 'string' }],
     }),
   ],
   preview: {
