@@ -15,7 +15,9 @@ import {
   postSlugsQuery,
 } from '~/lib/sanity.queries'
 import type { SharedPageProps } from '~/pages/_app'
-import { formatDate } from '~/utils'
+import { formatDate, formatToArchiveDate } from '~/utils'
+
+import { getArchivalDates } from '..'
 
 interface Query {
   [key: string]: string
@@ -57,30 +59,37 @@ export default function ProjectSlugRoute(
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
           <li className="breadcrumb-item">
-            <Link href="/">Blogs</Link>
+            <Link href="/">Blog</Link>
+          </li>
+          <li className="breadcrumb-item">
+            <Link href={`/archive/${getArchivalDates([post])[0]}`}>
+              {formatToArchiveDate(post._createdAt)}
+            </Link>
           </li>
           <li className="breadcrumb-item active" aria-current="page">
-            {formatDate(post._createdAt)}
+            {post.title}
           </li>
         </ol>
       </nav>
-      <section className="post">
-        {post.mainImage ? (
-          <Image
-            className="post__cover"
-            src={urlForImage(post.mainImage).url()}
-            height={231}
-            width={367}
-            alt=""
-          />
-        ) : (
-          <div className="post__cover--none" />
-        )}
-        <div className="post__container">
-          <h1 className="post__title">{post.title}</h1>
-          <p className="post__excerpt">{post.excerpt}</p>
-          <p className="post__date">{formatDate(post._createdAt)}</p>
-          <div className="post__content">
+      <section>
+        <div className="container border rounded p-4">
+          <h1 className="display-4 fst-italic">{post.title}</h1>
+
+          <p className="lead">{post.excerpt}</p>
+          {post.mainImage ? (
+            <div>
+              <Image
+                src={urlForImage(post.mainImage).url()}
+                height={231}
+                width={367}
+                alt=""
+                className="img-fluid"
+              />
+            </div>
+          ) : null}
+
+          <p className="text-body-secondary">{formatDate(post._createdAt)}</p>
+          <div className="">
             <PortableText value={post.body} />
           </div>
         </div>

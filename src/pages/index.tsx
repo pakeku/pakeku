@@ -33,6 +33,7 @@ export default function IndexPage(
 ) {
   const [posts] = useLiveQuery<Post[]>(props.posts, postsQuery)
   const recentposts = posts.slice(0, 10)
+
   return (
     <Container>
       <main>
@@ -44,8 +45,8 @@ export default function IndexPage(
                   <h1 className="display-4 fst-italic fw-bold">
                     {posts[0].title}
                   </h1>
-
                   <p className="lead mb-0">{formatDate(posts[0]._createdAt)}</p>
+                  <NewTag date={posts[0]._createdAt} />
                   <p className="lead my-3 text-black">{posts[0].excerpt}</p>
                 </div>
               </div>
@@ -55,8 +56,12 @@ export default function IndexPage(
           <div className="col-md-4">
             <div className="position-sticky" style={{ top: '2rem' }}>
               <div className="p-4 mb-3 bg-body-tertiary rounded">
-                <h4 className="fst-italic">
-                  Welcome to IT&nbsp;<code>.log</code>!
+                <h4>
+                  Welcome to{' '}
+                  <span className="fs-bold">
+                    IT<code>Blog</code>
+                  </span>
+                  !
                 </h4>
                 <p className="mb-0">
                   This is your go-to spot for awesome IT tips, tricks, and
@@ -66,7 +71,7 @@ export default function IndexPage(
                 </p>
               </div>
               <div>
-                <h4 className="fst-italic">Recent posts</h4>
+                <h4 className="fst-italic">Recent Posts</h4>
                 <ul className="list-unstyled">
                   {recentposts.map((post) => (
                     <li key={post.slug.current}>
@@ -79,6 +84,9 @@ export default function IndexPage(
                           <small className="text-body-secondary">
                             {formatDate(post._createdAt)}
                           </small>
+                          <div id="tags">
+                            <NewTag date={post._createdAt} />
+                          </div>
                         </div>
                       </a>
                     </li>
@@ -111,6 +119,30 @@ export default function IndexPage(
       </main>
     </Container>
   )
+}
+
+export const NewTag = ({ date }: { date: string }) => {
+  const postDate = new Date(date).getTime()
+  const oneWeekAgo = new Date().getTime() - 7 * 24 * 60 * 60 * 1000
+
+  if (postDate > oneWeekAgo) {
+    const badgeStyle = {
+      backgroundColor: 'rgba(40, 167, 69, 0.1)', // 10% color of bg-success
+      borderColor: 'rgba(40, 167, 69, 1)', // Full color of bg-success
+      borderWidth: '1px', // Border width
+      borderStyle: 'solid', // Border style
+      color: 'rgba(40, 167, 69, 1)', // Full color of bg-success
+      fontWeight: 'bold', // Bold text
+    }
+
+    return (
+      <span className="badge rounded-pill" style={badgeStyle}>
+        New
+      </span>
+    )
+  }
+
+  return null // Don't render anything if it's not new
 }
 
 export const getArchivalDates = (posts: Post[]) => {
