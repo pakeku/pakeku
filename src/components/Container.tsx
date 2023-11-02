@@ -74,7 +74,7 @@ export default function Container({
         <div className="container">
           <div className="row flex-nowrap justify-content-between align-items-center">
             <div className="col-6 pt-1">
-              <Link href="/">
+              <Link href="/" className='link-offset-2 link-underline link-underline-opacity-0'>
                 <h4>
                   IT
                   <strong>
