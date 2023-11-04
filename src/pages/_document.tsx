@@ -3,6 +3,9 @@ import { Head, Html, Main, NextScript } from 'next/document'
 const MyDocument = () => (
   <Html>
     <Head>
+      <!-- Google Tag for Search -->
+        <meta name="google-site-verification" content="cGuD4YnwyVHkoRBCKhF4is0iYsWubpzH6t9mhjsdx6U" />
+        
       <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
         rel="stylesheet"
